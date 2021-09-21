@@ -4,8 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/main.css'
 import {isEmpty, parseJson} from './utils';
 
+// global variables
 let dogBreeds;
-getDogBreeds();
+
+function main() {
+    getDogBreeds();
+
+    window.filterDogBreeds = filterDogBreeds;
+    window.onClickABreed = onClickABreed;
+    window.onClickASubBreed = onClickASubBreed;
+}
 
 function getDogBreeds() {
     let xhttp = new XMLHttpRequest();
@@ -43,7 +51,6 @@ function loadSubBreedsInDropDown(breedName, subBreeds) {
     }
 }
 
-window.filterDogBreeds = filterDogBreeds;
 function filterDogBreeds() {
     let dropdown = document.getElementById("dropdownDogBreed");
     let input = document.getElementById("ddlDogsFilter");
@@ -59,7 +66,6 @@ function filterDogBreeds() {
     }
 }
 
-window.onClickABreed = onClickABreed;
 function onClickABreed(breedName) {
     for (var key in dogBreeds.message) {
         var value = dogBreeds.message[key];
@@ -85,7 +91,6 @@ function onClickABreed(breedName) {
     }
 }
 
-window.onClickASubBreed = onClickASubBreed;
 function onClickASubBreed(subBreedName, breedName) {
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -115,3 +120,6 @@ function showBreedsContent(dogImageData) {
     }
     document.getElementById('gallery').innerHTML = htmlContent;
 }
+
+// run api
+main();

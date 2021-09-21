@@ -1,7 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const globals = require('./src/api/globals');
 
 module.exports = {
     entry: path.resolve(__dirname, './src/api/index.js'),
@@ -30,18 +31,19 @@ module.exports = {
             title: "Home",
             filename: 'index.html',
             template: path.resolve(__dirname, './src/pages/index.html'),
-            
+            templateParameters: globals,
         }),
         new HtmlWebpackPlugin({
             title: "Contact",
             filename: 'contact.html',
             template: path.resolve(__dirname, './src/pages/contact.html'),
+            templateParameters: globals,
         }),
         new HtmlWebpackPlugin({
             title: "About us",
             filename: 'about.html',
             template: path.resolve(__dirname, './src/pages/about.html'),
-            
+            templateParameters: globals,
         })
     ]
 }
