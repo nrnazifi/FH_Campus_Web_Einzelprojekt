@@ -23,10 +23,10 @@
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page"  href="contact.html">Contact</a>
+                        <a class="nav-link" aria-current="page" href="contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page"  href="about.html">About</a>
+                        <a class="nav-link" aria-current="page" href="about.html">About</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -37,12 +37,35 @@
         </div>
     </nav>
 
-    <main class="container">
-        <div class="bg-light p-5 rounded">
-            <h1><%= htmlWebpackPlugin.options.title %></h1>
+    <main class="container p-5">
+        <div class="bg-light pt-5 rounded">
+            <h1>
+                <%= htmlWebpackPlugin.options.title %>
+            </h1>
             <p class="lead">This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll,
                 it will remain fixed to the top of your browser’s viewport.</p>
-            <a class="btn btn-lg btn-primary" href="../components/navbar/" role="button">View navbar docs &raquo;</a>
+
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Breeds
+                </button>
+                <ul id="dropdownDogBreed" class="dropdown-menu dropdown-menu-dark dropdown-menu-macos mx-0 border-0 shadow">
+                </ul>
+            </div>
+            <div id="subBreeds" class="dropdown mt-1 d-none">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown button
+                </button>
+                <ul id="dropdownSubBreed" class="dropdown-menu dropdown-menu-dark dropdown-menu-macos mx-0 border-0 shadow">
+                </ul>
+            </div>
+            
+            <!-- Gallery -->
+            <div id="gallery" class="row mt-4">
+                
+            </div>
+            <!-- Gallery -->
+
         </div>
     </main>
 </body>
