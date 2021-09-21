@@ -7,11 +7,9 @@ const globals = require('./src/api/globals');
 module.exports = {
     entry: path.resolve(__dirname, './src/api/index.js'),
     output: {
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, './dist'),
-        filename: 'bundle.js'
-    },
-    devServer: {
-        static: path.resolve(__dirname, './dist')
+        clean: true,
     },
     module: {
         rules: [
@@ -45,5 +43,5 @@ module.exports = {
             template: path.resolve(__dirname, './src/pages/about.html'),
             templateParameters: globals,
         })
-    ]
-}
+    ],
+};
