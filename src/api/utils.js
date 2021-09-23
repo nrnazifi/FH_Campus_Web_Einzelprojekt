@@ -18,8 +18,8 @@ function parseJson(text) {
             console.debug("Error: response is not with json format!");
             console.log("Error ...");
         }
-        return null;
     }
+    return null;
 }
 
 export {isEmpty, parseJson};

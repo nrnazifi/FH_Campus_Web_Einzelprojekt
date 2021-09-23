@@ -38,9 +38,9 @@ module.exports = {
             templateParameters: globals,
         }),
         new HtmlWebpackPlugin({
-            title: "About us",
-            filename: 'about.html',
-            template: path.resolve(__dirname, './src/pages/about.html'),
+            title: "Favorites dogs",
+            filename: 'favorites.html',
+            template: path.resolve(__dirname, './src/pages/favorites.html'),
             templateParameters: globals,
         })
     ],

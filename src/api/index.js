@@ -1,6 +1,7 @@
 // Bootstrap
 import bootstrap from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap-icons/font/bootstrap-icons.css";
 import '../assets/styles/main.css'
 import {isEmpty, parseJson} from './utils';
 
@@ -13,6 +14,7 @@ function main() {
     window.filterDogBreeds = filterDogBreeds;
     window.onClickABreed = onClickABreed;
     window.onClickASubBreed = onClickASubBreed;
+    window.saveInLocalStorage = saveInLocalStorage;
 }
 
 function getDogBreeds() {
@@ -107,9 +109,15 @@ function showBreedsContent(dogImageData) {
     var jsonObj = parseJson(dogImageData);
     if(jsonObj !== null) {
         jsonObj.message.forEach(function(imgUrl, index, array) {
+            let cssClass = "bi bi-bookmark";
+            if(existInBookmarks(imgUrl)) {
+                cssClass = "bi bi-bookmark-fill";
+            }
+
             htmlContent += `
-                <div class="col-md-4 mt-1 mb-1">
+                <div class="img col-md-4 mt-1 mb-1">
                     <div class="thumbnail">
+                        <i class="`+ cssClass +`" onclick="saveInLocalStorage(this, \'`+ imgUrl +`\')"></i>
                         <a href="`+ imgUrl +`" target="_blank">
                             <img class="gallary-img" src="`+ imgUrl +`" alt="Lights">
                         </a>
@@ -119,6 +127,52 @@ function showBreedsContent(dogImageData) {
         });
     }
     document.getElementById('gallery').innerHTML = htmlContent;
+}
+
+function saveInLocalStorage(self, imgUrl) {
+    let isAdd = true;
+    let bookmarks = parseJson(localStorage.getItem("bookmarks"));
+    if(bookmarks != null) {
+        const isExistCondition = (element) => element === imgUrl;
+        let index = bookmarks.findIndex(isExistCondition);
+        if(index === -1) {
+            bookmarks.push(imgUrl);
+            isAdd = true;
+        } else {
+            bookmarks.splice(index, 1);
+            isAdd = false;
+        }
+    } else {
+        bookmarks = new Array(imgUrl);
+        isAdd = true;
+    }
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+
+    setBookmark(self, isAdd);
+}
+
+function setBookmark(self, marked) {
+    if(marked) {
+        self.classList.remove("bi-bookmark");
+        self.classList.add("bi-bookmark-fill");
+    } else {
+        self.classList.remove("bi-bookmark-fill");
+        self.classList.add("bi-bookmark");
+    }
+}
+
+function existInBookmarks(imgUrl) {
+    const isExistCondition = (element) => element === imgUrl;
+    let bookmarks = parseJson(localStorage.getItem("bookmarks"));
+    if(bookmarks != null) {
+        let index = bookmarks.findIndex(isExistCondition);
+        if(index === -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    return false;
 }
 
 // run api
