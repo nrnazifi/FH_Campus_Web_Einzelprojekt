@@ -1,14 +1,10 @@
-// Bootstrap
-import bootstrap from 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "bootstrap-icons/font/bootstrap-icons.css";
-import '../assets/styles/main.css'
+require("../api/main");
 import {isEmpty, parseJson} from './utils';
 
 // global variables
 let dogBreeds;
 
-function main() {
+function init() {
     getDogBreeds();
 
     window.filterDogBreeds = filterDogBreeds;
@@ -132,7 +128,7 @@ function showBreedsContent(dogImageData) {
 function saveInLocalStorage(self, imgUrl) {
     let isAdd = true;
     let bookmarks = parseJson(localStorage.getItem("bookmarks"));
-    if(bookmarks != null) {
+    if(bookmarks !== null) {
         const isExistCondition = (element) => element === imgUrl;
         let index = bookmarks.findIndex(isExistCondition);
         if(index === -1) {
@@ -176,4 +172,4 @@ function existInBookmarks(imgUrl) {
 }
 
 // run api
-main();
+init();

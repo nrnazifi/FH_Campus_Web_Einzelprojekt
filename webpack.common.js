@@ -5,11 +5,17 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const globals = require('./src/api/globals');
 
 module.exports = {
-    entry: path.resolve(__dirname, './src/api/index.js'),
+    entry: {
+        index: path.resolve(__dirname, './src/api/index.js'),
+        contact: path.resolve(__dirname, './src/api/contact.js'),
+        favorites: path.resolve(__dirname, './src/api/favorites.js'),
+    },
     output: {
-        filename: '[name].bundle.js',
         path: path.resolve(__dirname, './dist'),
         clean: true,
+        filename: '[name].bundle.js',
+        chunkFilename: '[id].bundle_[chunkhash].js',
+        sourceMapFilename: '[file].map'
     },
     module: {
         rules: [
@@ -30,18 +36,21 @@ module.exports = {
             filename: 'index.html',
             template: path.resolve(__dirname, './src/pages/index.html'),
             templateParameters: globals,
+            chunks: ['index'],
         }),
         new HtmlWebpackPlugin({
             title: "Contact",
             filename: 'contact.html',
             template: path.resolve(__dirname, './src/pages/contact.html'),
             templateParameters: globals,
+            chunks: ['contact'],
         }),
         new HtmlWebpackPlugin({
             title: "Favorites dogs",
             filename: 'favorites.html',
             template: path.resolve(__dirname, './src/pages/favorites.html'),
             templateParameters: globals,
+            chunks: ['favorites'],
         })
     ],
 };
