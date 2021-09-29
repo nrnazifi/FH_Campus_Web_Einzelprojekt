@@ -1,7 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPreconnectPlugin = require('html-webpack-preconnect-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const RobotstxtPlugin = require("robotstxt-webpack-plugin");
 const globals = require('./src/api/globals');
 
 module.exports = {
@@ -49,6 +51,9 @@ module.exports = {
             template: path.resolve(__dirname, './src/pages/index.html'),
             templateParameters: globals,
             chunks: ['index'],
+            preconnect: [
+                'https://images.dog.ceo',
+            ],
         }),
         new HtmlWebpackPlugin({
             title: "Contact",
@@ -56,6 +61,9 @@ module.exports = {
             template: path.resolve(__dirname, './src/pages/contact.html'),
             templateParameters: globals,
             chunks: ['contact'],
+            preconnect: [
+                'https://images.dog.ceo',
+            ],
         }),
         new HtmlWebpackPlugin({
             title: "Favorites dogs",
@@ -63,6 +71,12 @@ module.exports = {
             template: path.resolve(__dirname, './src/pages/favorites.html'),
             templateParameters: globals,
             chunks: ['favorites'],
-        })
+            preconnect: [
+                'https://images.dog.ceo',
+            ],
+        }),
+        // enabled preconnect plugin
+        new HtmlWebpackPreconnectPlugin(),
+        new RobotstxtPlugin({}),
     ],
 };

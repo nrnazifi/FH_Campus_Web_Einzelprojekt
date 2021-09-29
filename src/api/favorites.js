@@ -16,7 +16,7 @@ function showBreedsContent() {
                 <div class="img col-md-4 mt-1 mb-1">
                     <div class="thumbnail">
                         <i class="bi bi-bookmark-fill" onclick="removeFromLocalStorage(this, \'`+ imgUrl +`\')"></i>
-                        <a href="`+ imgUrl +`" target="_blank">
+                        <a href="`+ imgUrl +`" target="_blank" rel="noopener">
                             <img class="gallary-img" src="`+ imgUrl +`" alt="Lights">
                         </a>
                     </div>
